@@ -1,0 +1,254 @@
+/**
+ * Torii Gate Navigation Styles
+ */
+
+.torii-navigation {
+  position: relative;
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-2xl);
+}
+
+.torii-gates {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.torii-gate {
+  position: relative;
+  width: 140px;
+  height: 180px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.torii-gate:hover:not(.locked) {
+  transform: translateY(-8px);
+}
+
+.torii-gate.active .gate-arch {
+  border-color: var(--accent-celestial);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Torii gate structure */
+.gate-arch {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(107, 70, 193, 0.3);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.gate-arch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: var(--gradient-cosmic);
+  opacity: 0.05;
+  transition: opacity var(--transition-base);
+}
+
+.torii-gate:hover:not(.locked) .gate-arch::before {
+  opacity: 0.15;
+}
+
+.gate-arch .beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #6b46c1, transparent);
+}
+
+.gate-arch .beam.top {
+  top: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.gate-arch .beam.bottom {
+  top: 30px;
+  height: 4px;
+}
+
+.gate-arch .pillar {
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  width: 8px;
+  background: linear-gradient(180deg, #6b46c1, #4a2d8f);
+}
+
+.gate-arch .pillar.left {
+  left: 20px;
+}
+
+.gate-arch .pillar.right {
+  right: 20px;
+}
+
+/* Gate content */
+.gate-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: 50px;
+}
+
+.gate-content .icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 4px 8px rgba(107, 70, 193, 0.4));
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.gate-content .name-ja {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--accent-celestial);
+}
+
+.gate-content .name-en {
+  font-size: 0.875rem;
+  color: var(--accent-ethereal);
+  opacity: 0.8;
+}
+
+/* Locked state */
+.torii-gate.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 3;
+}
+
+.lock-overlay .lock-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.lock-overlay .unlock-hint {
+  font-size: 0.75rem;
+  color: var(--accent-mystic);
+}
+
+/* Tooltip */
+.gate-tooltip {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: var(--accent-ethereal);
+  z-index: 10;
+  pointer-events: none;
+  animation: fade-in-up 0.2s ease-out;
+}
+
+/* Season indicator */
+.season-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.season-indicator .season-icon {
+  font-size: 1.5rem;
+  animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+.season-indicator .season-name {
+  font-weight: 600;
+  color: var(--accent-celestial);
+}
+
+.season-indicator .season-name-en {
+  color: var(--accent-ethereal);
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .torii-gates {
+    gap: var(--space-md);
+  }
+
+  .torii-gate {
+    width: 100px;
+    height: 140px;
+  }
+
+  .gate-content {
+    padding-top: 40px;
+  }
+
+  .gate-content .icon {
+    font-size: 2rem;
+  }
+
+  .gate-content .name-ja {
+    font-size: 1rem;
+  }
+
+  .gate-content .name-en {
+    font-size: 0.75rem;
+  }
+}
