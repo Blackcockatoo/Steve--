@@ -8,6 +8,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   getConfig,
+  cloneConfig,
   upgradeTier,
   toggleMode,
   enableBatteryMode,
