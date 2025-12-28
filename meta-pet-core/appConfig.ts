@@ -11,6 +11,36 @@
 export type TierLevel = 'free' | 'premium' | 'mythic';
 export type AppMode = 'simple' | 'mythic';
 
+export function cloneConfig(config: AppConfig): AppConfig {
+  return {
+    ...config,
+    companions: { ...config.companions },
+    emotions: {
+      ...config.emotions,
+      enabledStates: new Set(config.emotions.enabledStates),
+    },
+    consciousness: { ...config.consciousness },
+    genome: { ...config.genome },
+    visuals: {
+      ...config.visuals,
+      cosmeticPacksAvailable: [...config.visuals.cosmeticPacksAvailable],
+    },
+    audio: {
+      ...config.audio,
+      enabledScales: new Set(config.audio.enabledScales),
+      soundPacksAvailable: [...config.audio.soundPacksAvailable],
+    },
+    evolution: { ...config.evolution },
+    rituals: {
+      ...config.rituals,
+      enabledRituals: new Set(config.rituals.enabledRituals),
+    },
+    data: { ...config.data },
+    performance: { ...config.performance },
+    ui: { ...config.ui },
+  };
+}
+
 export interface AppConfig {
   // User's current tier
   tier: TierLevel;
@@ -320,28 +350,44 @@ export const MYTHIC_CONFIG: AppConfig = {
 
 // ===== CONFIG MANAGEMENT =====
 
-let currentConfig: AppConfig = FREE_CONFIG;
+type ConfigChangeListener = (config: AppConfig) => void;
+
+const configListeners = new Set<ConfigChangeListener>();
+
+export function subscribeToConfigChanges(listener: ConfigChangeListener): () => void {
+  configListeners.add(listener);
+  return () => configListeners.delete(listener);
+}
+
+function notifyConfigChange(config: AppConfig): void {
+  configListeners.forEach((listener) => listener(cloneConfig(config)));
+}
+
+let currentConfig: AppConfig = cloneConfig(FREE_CONFIG);
 
 export function getConfig(): AppConfig {
-  return currentConfig;
+  return cloneConfig(currentConfig);
 }
 
 export function setConfig(config: AppConfig): void {
-  currentConfig = config;
+  currentConfig = cloneConfig(config);
+  notifyConfigChange(currentConfig);
 }
 
 export function upgradeTier(tier: TierLevel): void {
   switch (tier) {
     case 'free':
-      currentConfig = FREE_CONFIG;
+      currentConfig = cloneConfig(FREE_CONFIG);
       break;
     case 'premium':
-      currentConfig = PREMIUM_CONFIG;
+      currentConfig = cloneConfig(PREMIUM_CONFIG);
       break;
     case 'mythic':
-      currentConfig = MYTHIC_CONFIG;
+      currentConfig = cloneConfig(MYTHIC_CONFIG);
       break;
   }
+
+  notifyConfigChange(currentConfig);
 }
 
 export function toggleMode(): void {
@@ -351,49 +397,68 @@ export function toggleMode(): void {
     return;
   }
 
-  currentConfig.mode = currentConfig.mode === 'simple' ? 'mythic' : 'simple';
+  const base = cloneConfig(currentConfig);
+  const nextMode = base.mode === 'simple' ? 'mythic' : 'simple';
 
-  // Update UI complexity based on mode
-  if (currentConfig.mode === 'mythic') {
-    currentConfig.ui.showAdvancedStats = true;
-    currentConfig.ui.showMathematicalReadouts = true;
-    currentConfig.ui.theme = 'technical';
-  } else {
-    currentConfig.ui.showAdvancedStats = true; // Keep stats
-    currentConfig.ui.showMathematicalReadouts = false; // Hide math
-    currentConfig.ui.theme = 'mystical';
-  }
+  const nextUi =
+    nextMode === 'mythic'
+      ? {
+          ...base.ui,
+          showAdvancedStats: true,
+          showMathematicalReadouts: true,
+          theme: 'technical',
+        }
+      : {
+          ...base.ui,
+          showAdvancedStats: true, // Keep stats
+          showMathematicalReadouts: false, // Hide math
+          theme: 'mystical',
+        };
+
+  currentConfig = {
+    ...base,
+    mode: nextMode,
+    ui: nextUi,
+  };
+
+  notifyConfigChange(currentConfig);
 }
 
 export function enableBatteryMode(enabled: boolean): void {
-  currentConfig.performance.batteryMode = enabled;
+  const base = cloneConfig(currentConfig);
+  const performance = { ...base.performance, batteryMode: enabled };
+  const visuals = { ...base.visuals };
 
   if (enabled) {
-    currentConfig.performance.targetFPS = 30;
-    currentConfig.visuals.maxParticleCount = Math.min(
-      currentConfig.visuals.maxParticleCount,
-      15
-    );
-    currentConfig.visuals.enableQuantumEffects = false;
-    currentConfig.visuals.enableTemporalTrails = false;
+    performance.targetFPS = 30;
+    visuals.maxParticleCount = Math.min(base.visuals.maxParticleCount, 15);
+    visuals.enableQuantumEffects = false;
+    visuals.enableTemporalTrails = false;
   } else {
-    // Restore tier-appropriate settings
-    const tier = currentConfig.tier;
+    const tier = base.tier;
     if (tier === 'free') {
-      currentConfig.performance.targetFPS = 30;
-      currentConfig.visuals.maxParticleCount = 15;
+      performance.targetFPS = 30;
+      visuals.maxParticleCount = 15;
     } else if (tier === 'premium') {
-      currentConfig.performance.targetFPS = 60;
-      currentConfig.visuals.maxParticleCount = 40;
-      currentConfig.visuals.enableQuantumEffects = true;
-      currentConfig.visuals.enableTemporalTrails = true;
+      performance.targetFPS = 60;
+      visuals.maxParticleCount = 40;
+      visuals.enableQuantumEffects = true;
+      visuals.enableTemporalTrails = true;
     } else {
-      currentConfig.performance.targetFPS = 60;
-      currentConfig.visuals.maxParticleCount = 60;
-      currentConfig.visuals.enableQuantumEffects = true;
-      currentConfig.visuals.enableTemporalTrails = true;
+      performance.targetFPS = 60;
+      visuals.maxParticleCount = 60;
+      visuals.enableQuantumEffects = true;
+      visuals.enableTemporalTrails = true;
     }
   }
+
+  currentConfig = {
+    ...base,
+    performance,
+    visuals,
+  };
+
+  notifyConfigChange(currentConfig);
 }
 
 // ===== FEATURE CHECKS (Use these throughout your code) =====

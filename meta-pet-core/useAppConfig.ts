@@ -8,10 +8,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   getConfig,
-  setConfig,
   upgradeTier,
   toggleMode,
   enableBatteryMode,
+  subscribeToConfigChanges,
   can,
   PAYWALL_MESSAGES,
   COSMETIC_PACKS,
@@ -19,46 +19,7 @@ import {
   PRICING,
   type AppConfig,
   type TierLevel,
-  type AppMode,
 } from './appConfig';
-
-// ===== CONFIG CHANGE LISTENERS =====
-
-type ConfigChangeListener = (config: AppConfig) => void;
-const listeners = new Set<ConfigChangeListener>();
-
-function notifyConfigChange(config: AppConfig): void {
-  listeners.forEach((listener) => listener(config));
-}
-
-function subscribeToConfigChanges(listener: ConfigChangeListener): () => void {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
-
-// Enhanced setConfig that notifies listeners
-const setConfigWithNotify = (config: AppConfig): void => {
-  setConfig(config);
-  notifyConfigChange(config);
-};
-
-// Enhanced tier upgrade that notifies
-const upgradeTierWithNotify = (tier: TierLevel): void => {
-  upgradeTier(tier);
-  notifyConfigChange(getConfig());
-};
-
-// Enhanced mode toggle that notifies
-const toggleModeWithNotify = (): void => {
-  toggleMode();
-  notifyConfigChange(getConfig());
-};
-
-// Enhanced battery mode that notifies
-const enableBatteryModeWithNotify = (enabled: boolean): void => {
-  enableBatteryMode(enabled);
-  notifyConfigChange(getConfig());
-};
 
 // ===== MAIN HOOK =====
 
@@ -75,15 +36,15 @@ export function useAppConfig() {
   }, []);
 
   const upgrade = useCallback((tier: TierLevel) => {
-    upgradeTierWithNotify(tier);
+    upgradeTier(tier);
   }, []);
 
   const toggleUiMode = useCallback(() => {
-    toggleModeWithNotify();
+    toggleMode();
   }, []);
 
   const setBatteryMode = useCallback((enabled: boolean) => {
-    enableBatteryModeWithNotify(enabled);
+    enableBatteryMode(enabled);
   }, []);
 
   return {
