@@ -1,10 +1,38 @@
-# Steve - Meta Pet
+# Steve - Digital Companion Systems
 
-A cosmic digital companion experience built on the "Temple With Curtains" freemium philosophy.
+Two complete companion game frameworks built on the "Temple With Curtains" freemium philosophy.
+
+## 🏮 Projects
+
+### 1. **Mononoke Garden** (もののけ庭園) - Japanese Companion Game 🌸
+**NEW:** Complete Japanese-market companion game with deep genetics and cultural resonance.
+
+**→ [View Mononoke Garden Documentation](mononoke-garden-core/README.md)**
+
+**→ [View Live Demo](mononoke-garden-core/demo.html)**
+
+- 🏮 7-level Kizuna bond system (見つけた → 輪廻)
+- 🧬 Base-7 genetics (823,543 personality combinations)
+- 🌸 7 Japanese seasonal calendar
+- 👶 Breeding system with genetic inheritance
+- ⛩️ Shrine-Core design with torii gates & lanterns
+- 💰 Ethical freemium (Free/Kizuna Pass ¥4,990/Eternal ¥29,990)
+
+---
+
+### 2. **Meta-Pet Core** - Western Companion Framework 🌌
+Original cosmic-themed companion configuration system.
+
+**→ [View Meta-Pet Documentation](meta-pet-core/)**
 
 ## 🌌 Overview
 
-Steve (Meta-Pet) is a TypeScript/React configuration and feature-gating library for building freemium digital companion applications. It implements a sophisticated three-tier business model that balances free user experience with premium value.
+This repository contains two complete digital companion game systems:
+
+- **Mononoke Garden** - Japanese market, cultural depth, breeding-focused
+- **Meta-Pet Core** - Western market, cosmic theme, evolution-focused
+
+Both share the "Temple With Curtains" philosophy: ethical monetization that never punishes free users.
 
 ## ✨ Features
 
@@ -46,19 +74,31 @@ cat meta-pet-core/DESIGN_SYSTEM.md
 
 ```
 Steve--/
-├── meta-pet-core/
-│   ├── appConfig.ts                  # Core configuration system
-│   ├── useAppConfig.ts               # React hooks
-│   ├── configIntegrationExamples.tsx # Integration examples
-│   ├── styles.css                    # Design system CSS
-│   ├── demo.html                     # Interactive demo
-│   ├── DESIGN_SYSTEM.md             # Design documentation
-│   ├── FREEMIUM_STRATEGY.md         # Business model docs
-│   ├── MIGRATION_GUIDE.md           # Integration guide
-│   └── tests/
-│       └── appConfig.sanity.ts      # Config tests
-├── README.md                         # This file
-└── LICENSE                           # MIT License
+├── mononoke-garden-core/          # 🏮 Japanese Companion Game
+│   ├── gameConfig.ts              # Tier system (Free/Pass/Eternal)
+│   ├── genetics/
+│   │   └── base7Genome.ts         # Base-7 genetics engine
+│   ├── kizuna/
+│   │   └── bondSystem.ts          # 7-level bond progression
+│   ├── breeding/
+│   │   └── breedingEngine.ts      # Genetic inheritance
+│   ├── seasons/
+│   │   └── calendar.ts            # 7 Japanese seasons
+│   ├── styles.css                 # Shrine-Core design system
+│   ├── demo.html                  # Interactive demo
+│   └── README.md                  # Complete documentation
+│
+├── meta-pet-core/                 # 🌌 Western Companion Framework
+│   ├── appConfig.ts               # Core configuration system
+│   ├── useAppConfig.ts            # React hooks
+│   ├── styles.css                 # Cosmic design system
+│   ├── demo.html                  # Interactive demo
+│   ├── DESIGN_SYSTEM.md          # Design documentation
+│   ├── FREEMIUM_STRATEGY.md      # Business model docs
+│   └── MIGRATION_GUIDE.md        # Integration guide
+│
+├── README.md                      # This file
+└── LICENSE                        # MIT License
 ```
 
 ## 🚀 Quick Start
