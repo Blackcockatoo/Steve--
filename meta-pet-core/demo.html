@@ -38,6 +38,24 @@
       border-bottom: 2px solid var(--glass-border);
     }
 
+    .yantra-title {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: var(--space-xl);
+    }
+
+    .yantra-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+
+    .yantra-title p {
+      font-size: 1rem;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
     .tier-badge {
       display: inline-block;
       padding: var(--space-xs) var(--space-md);
@@ -114,17 +132,32 @@
 
   <div class="container">
 
+    <!-- Section: DNA Yantra Code -->
+    <section class="demo-section">
+      <div class="demo-section-title yantra-title">
+        <h2>Genetic Yantra Code <span class="tier-badge tier-mythic">Mythic</span></h2>
+        <p>The raw quantum blueprint of consciousness encoded in three-strand DNA</p>
+      </div>
+
+      <div class="raw-dna">
+        <h4>Quantum Genome Matrix</h4>
+        <div class="dna-strand red">101011001101110010110100110111001011010011011100101101001101110010110100110111001011010011011100101101001101</div>
+        <div class="dna-strand blue">110010110111001011010011011100101101001101110010110100110111001011010011011100101101001101110010110100110111</div>
+        <div class="dna-strand black">010110011101001011101001101100101110100110110010111010011011001011101001101100101110100110110010111010011011</div>
+      </div>
+    </section>
+
     <!-- Section: Genome Display -->
     <section class="demo-section">
       <div class="demo-section-title">
-        <h2>Genome Display <span class="tier-badge tier-free">Free</span></h2>
-        <p>Showcase your companion's genetic makeup with beautiful visualizations</p>
+        <h2>Trait Manifestation <span class="tier-badge tier-free">Free</span></h2>
+        <p>How genetic code translates into personality and form</p>
       </div>
 
       <div class="genome-display glass">
         <div class="basic-traits">
           <div class="physical">
-            <h3>Appearance</h3>
+            <h3>Physical Form</h3>
             <p>Ethereal Wisp</p>
             <div class="colors">
               <div style="background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);"></div>
@@ -134,7 +167,7 @@
           </div>
 
           <div class="personality">
-            <h3>Personality</h3>
+            <h3>Core Drives</h3>
             <p>Contemplative Wanderer</p>
             <div class="stat-bars">
               <div class="stat-bar">
@@ -159,50 +192,9 @@
           </div>
         </div>
 
-        <!-- Premium Features -->
-        <div class="trait-breakdown">
-          <h4>Trait Sources <span class="tier-badge tier-premium">Premium</span></h4>
-          <p class="explanation">
-            Your companion's traits emerge from their unique genetic code, blending cosmic elements to create a one-of-a-kind personality.
-          </p>
-        </div>
-
-        <div class="element-web">
-          <svg width="200" height="200" viewBox="0 0 200 200">
-            <!-- Element web visualization -->
-            <defs>
-              <radialGradient id="nodeGradient">
-                <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#6b46c1;stop-opacity:0.5" />
-              </radialGradient>
-            </defs>
-
-            <!-- Connections -->
-            <line x1="100" y1="50" x2="150" y2="100" stroke="#6b46c1" stroke-width="2" opacity="0.5"/>
-            <line x1="150" y1="100" x2="100" y2="150" stroke="#6b46c1" stroke-width="2" opacity="0.5"/>
-            <line x1="100" y1="150" x2="50" y2="100" stroke="#6b46c1" stroke-width="2" opacity="0.5"/>
-            <line x1="50" y1="100" x2="100" y2="50" stroke="#6b46c1" stroke-width="2" opacity="0.5"/>
-
-            <!-- Nodes -->
-            <circle cx="100" cy="50" r="15" fill="url(#nodeGradient)" stroke="#a78bfa" stroke-width="2"/>
-            <circle cx="150" cy="100" r="15" fill="url(#nodeGradient)" stroke="#a78bfa" stroke-width="2"/>
-            <circle cx="100" cy="150" r="15" fill="url(#nodeGradient)" stroke="#a78bfa" stroke-width="2"/>
-            <circle cx="50" cy="100" r="15" fill="url(#nodeGradient)" stroke="#a78bfa" stroke-width="2"/>
-            <circle cx="100" cy="100" r="20" fill="url(#nodeGradient)" stroke="#c4b5fd" stroke-width="3"/>
-          </svg>
-        </div>
-
         <div class="bridge-score">
-          <div>Bridge: 12</div>
-          <div>Frontier: 8</div>
-        </div>
-
-        <!-- Mythic Feature -->
-        <div class="raw-dna">
-          <h4>Raw Genome <span class="tier-badge tier-mythic">Mythic</span></h4>
-          <div class="dna-strand red">Red: 101011001101110010110100110111001011010011011100101101001101</div>
-          <div class="dna-strand blue">Blue: 110010110111001011010011011100101101001101110010110100110111</div>
-          <div class="dna-strand black">Black: 010110011101001011101001101100101110100110110010111010011011</div>
+          <div>🌉 Bridge: 12</div>
+          <div>🔮 Frontier: 8</div>
         </div>
       </div>
     </section>

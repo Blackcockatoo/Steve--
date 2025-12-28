@@ -152,7 +152,13 @@ p {
 /* ==================== GENOME DISPLAY ==================== */
 
 .genome-display {
-  padding: var(--space-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.genome-hero {
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
@@ -160,22 +166,33 @@ p {
 
 .basic-traits {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--space-lg);
 }
 
 .basic-traits > div {
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--glass-border);
   transition: all var(--transition-base);
 }
 
 .basic-traits > div:hover {
-  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.05);
   border-color: var(--accent-celestial);
-  box-shadow: var(--shadow-glow);
+  box-shadow: 0 4px 20px rgba(107, 70, 193, 0.3);
+}
+
+.basic-traits h3 {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+}
+
+.basic-traits p {
+  font-size: 0.875rem;
+  color: var(--accent-ethereal);
+  opacity: 0.9;
 }
 
 .physical .colors {
@@ -185,16 +202,17 @@ p {
 }
 
 .physical .colors > div {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: var(--radius-md);
-  border: 2px solid var(--glass-border);
-  box-shadow: var(--shadow-md);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform var(--transition-bounce);
 }
 
 .physical .colors > div:hover {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.15) rotate(5deg);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* ==================== STAT BARS ==================== */
@@ -306,47 +324,161 @@ p {
   font-size: 1.125rem;
 }
 
-/* ==================== RAW DNA VIEWER ==================== */
+/* ==================== RAW DNA VIEWER (YANTRA CODE) ==================== */
 
 .raw-dna {
-  padding: var(--space-lg);
-  background: var(--cosmic-deep);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--accent-quantum);
+  padding: var(--space-2xl);
+  background: var(--cosmic-void);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--accent-quantum);
   font-family: var(--font-mono);
+  box-shadow:
+    var(--shadow-glow),
+    inset 0 0 60px rgba(6, 182, 212, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.raw-dna::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(6, 182, 212, 0.1),
+    transparent 30%,
+    transparent 60%,
+    rgba(139, 92, 246, 0.1),
+    transparent
+  );
+  animation: rotate 8s linear infinite;
+  pointer-events: none;
 }
 
 .raw-dna h4 {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
   font-family: var(--font-sans);
+  font-size: 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--gradient-quantum);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .dna-strand {
-  padding: var(--space-sm) var(--space-md);
-  margin: var(--space-sm) 0;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-md) 0;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
   overflow-x: auto;
   white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base);
+  cursor: default;
+  font-weight: 500;
+  animation: dna-pulse 6s ease-in-out infinite;
+}
+
+@keyframes dna-pulse {
+  0%, 100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.dna-strand::-webkit-scrollbar {
+  height: 6px;
+}
+
+.dna-strand::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-sm);
+}
+
+.dna-strand::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.dna-strand::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dna-strand:hover {
+  transform: translateX(4px);
 }
 
 .dna-strand.red {
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 100%);
+  background:
+    linear-gradient(90deg, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.05) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
   color: #fca5a5;
-  border-left: 3px solid #ef4444;
+  border-left: 4px solid #ef4444;
+  box-shadow:
+    inset 0 1px 0 rgba(239, 68, 68, 0.5),
+    0 0 20px rgba(239, 68, 68, 0.2);
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  animation-delay: 0s;
+}
+
+.dna-strand.red:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(239, 68, 68, 0.7),
+    0 0 30px rgba(239, 68, 68, 0.4);
+  border-left-color: #fca5a5;
 }
 
 .dna-strand.blue {
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%);
+  background:
+    linear-gradient(90deg, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0.05) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
   color: #93c5fd;
-  border-left: 3px solid #3b82f6;
+  border-left: 4px solid #3b82f6;
+  box-shadow:
+    inset 0 1px 0 rgba(59, 130, 246, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.2);
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  animation-delay: 2s;
+}
+
+.dna-strand.blue:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(59, 130, 246, 0.7),
+    0 0 30px rgba(59, 130, 246, 0.4);
+  border-left-color: #93c5fd;
 }
 
 .dna-strand.black {
-  background: linear-gradient(90deg, rgba(107, 70, 193, 0.2) 0%, rgba(107, 70, 193, 0.05) 100%);
+  background:
+    linear-gradient(90deg, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.05) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
   color: #c4b5fd;
-  border-left: 3px solid #6b46c1;
+  border-left: 4px solid #8b5cf6;
+  box-shadow:
+    inset 0 1px 0 rgba(139, 92, 246, 0.5),
+    0 0 20px rgba(139, 92, 246, 0.2);
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  animation-delay: 4s;
+}
+
+.dna-strand.black:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(139, 92, 246, 0.7),
+    0 0 30px rgba(139, 92, 246, 0.4);
+  border-left-color: #c4b5fd;
 }
 
 /* ==================== PARTICLE FIELD ==================== */
