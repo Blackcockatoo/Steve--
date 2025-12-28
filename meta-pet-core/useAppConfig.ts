@@ -12,7 +12,6 @@ import {
   toggleMode,
   enableBatteryMode,
   subscribeToConfigChanges,
-  cloneConfig,
   can,
   PAYWALL_MESSAGES,
   COSMETIC_PACKS,
