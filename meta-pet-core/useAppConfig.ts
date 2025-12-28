@@ -29,7 +29,7 @@ export function useAppConfig() {
   useEffect(() => {
     // Subscribe to config changes
     const unsubscribe = subscribeToConfigChanges((newConfig) => {
-      setLocalConfig(newConfig);
+      setLocalConfig(cloneConfig(newConfig));
     });
 
     return unsubscribe;
