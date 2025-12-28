@@ -6,7 +6,8 @@
       "Bash(dir:*)",
       "Bash(find:*)",
       "Bash(npm run build:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npx kill-port 3000 3001)"
     ]
   }
 }
