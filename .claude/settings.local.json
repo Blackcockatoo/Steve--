@@ -7,7 +7,9 @@
       "Bash(find:*)",
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
-      "Bash(npx kill-port 3000 3001)"
+      "Bash(npx kill-port 3000 3001)",
+      "Bash(npm run:*)",
+      "Bash(findstr:*)"
     ]
   }
 }
