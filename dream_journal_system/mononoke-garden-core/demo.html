@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏮 Mononoke Garden - もののけ庭園 🌸</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .demo-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-subtitle {
+      font-size: 1.25rem;
+      color: var(--giniro-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <!-- Header -->
+    <header class="demo-header">
+      <h1 class="demo-title">🏮 Mononoke Garden 🌸</h1>
+      <p class="demo-subtitle">もののけ庭園 - 絆を通じた日々の儀式</p>
+      <p class="demo-subtitle">Kizuna Through Daily Ritual</p>
+    </header>
+
+    <!-- Torii Gate Navigation -->
+    <nav class="torii-nav">
+      <a href="#garden" class="torii-gate active">
+        <span class="torii-icon">⛩️</span>
+        <span class="torii-label">庭園<br>Garden</span>
+      </a>
+      <a href="#kizuna" class="torii-gate">
+        <span class="torii-icon">💫</span>
+        <span class="torii-label">絆<br>Kizuna</span>
+      </a>
+      <a href="#breeding" class="torii-gate">
+        <span class="torii-icon">👶</span>
+        <span class="torii-label">繁殖<br>Breeding</span>
+      </a>
+      <a href="#seasons" class="torii-gate">
+        <span class="torii-icon">🌸</span>
+        <span class="torii-label">季節<br>Seasons</span>
+      </a>
+    </nav>
+
+    <!-- Current Season Banner -->
+    <div class="seasonal-banner">
+      <div class="seasonal-icon">🌸</div>
+      <div class="seasonal-name-jp">立春</div>
+      <div class="seasonal-name-en">Risshun - Spring Awakening</div>
+      <p>春の目覚め、桜の季節</p>
+      <p>Breeding Bonus: +100% XP</p>
+    </div>
+
+    <!-- Kizuna Level Display -->
+    <section id="kizuna" class="shrine-glass mb-xl">
+      <h2 class="text-center">Kizuna Bond System</h2>
+
+      <div class="kizuna-level-card">
+        <div class="kizuna-icon">💫</div>
+        <div class="kizuna-name-jp">永遠</div>
+        <div class="kizuna-name-en">Eternal</div>
+        <p>Level 6 of 7 - Eternal bond achieved</p>
+
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 75%;"></div>
+        </div>
+        <div class="progress-text">1,875 / 2,200 XP to Level 7 (輪廻)</div>
+      </div>
+
+      <!-- 7-Pointed Mandala -->
+      <div class="kizuna-mandala">
+        <svg class="mandala-svg" viewBox="0 0 300 300">
+          <!-- Background circles -->
+          <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(107, 70, 193, 0.2)" stroke-width="1" />
+          <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(107, 70, 193, 0.2)" stroke-width="1" />
+          <circle cx="150" cy="150" r="60" fill="none" stroke="rgba(107, 70, 193, 0.2)" stroke-width="1" />
+
+          <!-- 7-pointed star paths -->
+          <path d="M 150 30 L 245.1 111.8 L 212.9 215.4 L 87.1 215.4 L 54.9 111.8 Z"
+                class="mandala-point active" />
+
+          <!-- Center circle -->
+          <circle cx="150" cy="150" r="20" class="mandala-center" />
+
+          <!-- Level points -->
+          <g>
+            <!-- Level 1 - Top -->
+            <circle cx="150" cy="30" r="12" class="mandala-point active" />
+            <text x="150" y="20" text-anchor="middle" fill="var(--kin)" font-size="14" font-weight="bold">1</text>
+
+            <!-- Level 2 -->
+            <circle cx="245.1" cy="111.8" r="12" class="mandala-point active" />
+            <text x="255" y="115" text-anchor="start" fill="var(--kin)" font-size="14" font-weight="bold">2</text>
+
+            <!-- Level 3 -->
+            <circle cx="212.9" cy="215.4" r="12" class="mandala-point active" />
+            <text x="220" y="225" text-anchor="start" fill="var(--kin)" font-size="14" font-weight="bold">3</text>
+
+            <!-- Level 4 -->
+            <circle cx="150" cy="270" r="12" class="mandala-point active" />
+            <text x="150" y="290" text-anchor="middle" fill="var(--kin)" font-size="14" font-weight="bold">4</text>
+
+            <!-- Level 5 -->
+            <circle cx="87.1" cy="215.4" r="12" class="mandala-point active" />
+            <text x="75" y="225" text-anchor="end" fill="var(--kin)" font-size="14" font-weight="bold">5</text>
+
+            <!-- Level 6 -->
+            <circle cx="54.9" cy="111.8" r="12" class="mandala-point active" />
+            <text x="45" y="115" text-anchor="end" fill="var(--kin)" font-size="14" font-weight="bold">6</text>
+
+            <!-- Level 7 (locked) -->
+            <circle cx="150" cy="30" r="8" fill="rgba(31, 41, 55, 0.5)" stroke="var(--kurogane-light)" stroke-width="2" transform="translate(0, -10)" />
+            <text x="150" y="15" text-anchor="middle" fill="var(--giniro-dark)" font-size="12">7</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="text-center">
+        <p style="color: var(--giniro-dark);">
+          7 levels of sacred bonding from 見つけた (Found) to 輪廻 (Reincarnation)
+        </p>
+      </div>
+    </section>
+
+    <!-- Rituals Grid -->
+    <section class="shrine-glass mb-xl">
+      <h2>Daily Rituals (日々の儀式)</h2>
+      <p class="text-center" style="color: var(--giniro-dark);">
+        Perform rituals to deepen your bond with your companion
+      </p>
+
+      <div class="ritual-grid">
+        <button class="ritual-btn">
+          <span class="ritual-icon">🙏</span>
+          <div class="ritual-name">Morning Prayer</div>
+          <div class="ritual-name">朝の祈り</div>
+          <div class="ritual-xp">+15 XP</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">🎮</span>
+          <div class="ritual-name">Midday Play</div>
+          <div class="ritual-name">昼の遊び</div>
+          <div class="ritual-xp">+12 XP</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">🍽️</span>
+          <div class="ritual-name">Evening Meal</div>
+          <div class="ritual-name">夕食</div>
+          <div class="ritual-xp">+12 XP</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">📖</span>
+          <div class="ritual-name">Night Story</div>
+          <div class="ritual-name">夜の物語</div>
+          <div class="ritual-xp">+10 XP</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">🧘</span>
+          <div class="ritual-name">Meditation</div>
+          <div class="ritual-name">瞑想</div>
+          <div class="ritual-xp">+20 XP</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">⛩️</span>
+          <div class="ritual-name">Shrine Visit</div>
+          <div class="ritual-name">神社参拝</div>
+          <div class="ritual-xp">+25 XP</div>
+        </button>
+
+        <button class="ritual-btn locked">
+          <span class="ritual-icon">👶</span>
+          <div class="ritual-name">Breeding</div>
+          <div class="ritual-name">繁殖儀式</div>
+          <div class="ritual-xp">🔒 Level 7</div>
+        </button>
+
+        <button class="ritual-btn">
+          <span class="ritual-icon">🌸</span>
+          <div class="ritual-name">Sakura Viewing</div>
+          <div class="ritual-name">花見</div>
+          <div class="ritual-xp">+30 XP (Seasonal)</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Personality Display -->
+    <section class="shrine-glass mb-xl">
+      <h2>Personality System (7 Axes)</h2>
+      <p class="text-center" style="color: var(--giniro-dark);">
+        Each companion has unique personality traits on 7 axes (0-6 scale)
+      </p>
+
+      <div class="personality-chart">
+        <svg class="personality-svg" viewBox="0 0 400 400">
+          <!-- Background grid -->
+          <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(107, 70, 193, 0.1)" stroke-width="1" />
+          <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(107, 70, 193, 0.1)" stroke-width="1" />
+          <circle cx="200" cy="200" r="50" fill="none" stroke="rgba(107, 70, 193, 0.1)" stroke-width="1" />
+
+          <!-- 7 axis lines -->
+          <line x1="200" y1="200" x2="200" y2="50" class="axis-line" />
+          <line x1="200" y1="200" x2="340.4" y2="114.6" class="axis-line" />
+          <line x1="200" y1="200" x2="307.1" y2="307.1" class="axis-line" />
+          <line x1="200" y1="200" x2="200" y2="350" class="axis-line" />
+          <line x1="200" y1="200" x2="92.9" y2="307.1" class="axis-line" />
+          <line x1="200" y1="200" x2="59.6" y2="114.6" class="axis-line" />
+          <line x1="200" y1="200" x2="150" y2="50" class="axis-line" />
+
+          <!-- Personality polygon (example values) -->
+          <polygon points="200,80 280,130 270,250 200,300 130,250 120,130 170,80"
+                   class="personality-polygon" />
+
+          <!-- Axis labels -->
+          <text x="200" y="40" class="axis-label">Shyness 内気</text>
+          <text x="350" y="110" class="axis-label">Emotionality 感情</text>
+          <text x="320" y="330" class="axis-label">Energy 活発</text>
+          <text x="200" y="370" class="axis-label">Sociability 社交</text>
+          <text x="70" y="330" class="axis-label">Bravery 勇敢</text>
+          <text x="40" y="110" class="axis-label">Creativity 創造</text>
+          <text x="140" y="40" class="axis-label">Openness 開放</text>
+        </svg>
+      </div>
+
+      <div class="text-center">
+        <span class="tier-badge kizuna-pass">Kizuna Pass Feature</span>
+      </div>
+    </section>
+
+    <!-- Genome Display -->
+    <section class="genome-display mb-xl">
+      <h2>Base-7 Genetics System</h2>
+      <p class="text-center" style="color: var(--giniro-dark);">
+        Three 60-digit base-7 sequences encode personality, appearance, and abilities
+      </p>
+
+      <div class="dna-strand red">
+        <strong>RED60 (Personality):</strong><br>
+        3425614352461535246135246213524613524621352461352461352461352461
+      </div>
+
+      <div class="dna-strand blue">
+        <strong>BLUE60 (Appearance):</strong><br>
+        5214635241635214635214635214635214635214635214635214635214635214
+      </div>
+
+      <div class="dna-strand black">
+        <strong>BLACK60 (Abilities):</strong><br>
+        1352461352461352461352461352461352461352461352461352461352461352
+      </div>
+
+      <div class="text-center mt-lg">
+        <span class="tier-badge eternal">Eternal Kizuna Feature</span>
+        <p style="color: var(--giniro-dark); margin-top: 1rem;">
+          Hidden complexity creates emergent behavior and genuine uniqueness
+        </p>
+      </div>
+    </section>
+
+    <!-- Breeding Preview -->
+    <section id="breeding" class="shrine-glass mb-xl">
+      <h2>Breeding System (繁殖システム)</h2>
+      <p class="text-center" style="color: var(--giniro-dark);">
+        Breed companions at Kizuna Level 7 to create offspring with inherited traits
+      </p>
+
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div style="text-align: center;">
+          <div style="font-size: 4rem;">🐉</div>
+          <h3>Parent 1: Akari</h3>
+          <p>Brave, Energetic, Social</p>
+          <p style="color: var(--kin);">Rarity: Epic</p>
+        </div>
+
+        <div style="text-align: center;">
+          <div style="font-size: 4rem;">🦋</div>
+          <h3>Parent 2: Yuki</h3>
+          <p>Calm, Creative, Introspective</p>
+          <p style="color: var(--sakura);">Rarity: Rare</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-xl">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">➕</div>
+        <div style="font-size: 5rem; margin-bottom: 1rem;">🥚</div>
+        <p style="color: var(--kin-light); font-size: 1.25rem;">Incubating... 3 days remaining</p>
+        <div class="progress-bar" style="max-width: 400px; margin: 1rem auto;">
+          <div class="progress-fill" style="width: 60%;"></div>
+        </div>
+        <p style="color: var(--giniro-dark);">
+          Predicted offspring: Balanced personality, Legendary rarity
+        </p>
+      </div>
+
+      <div class="text-center mt-xl">
+        <span class="tier-badge kizuna-pass">Kizuna Pass: 3 breedings/year</span>
+        <span class="tier-badge eternal">Eternal: Unlimited breedings</span>
+      </div>
+    </section>
+
+    <!-- Seasonal Events -->
+    <section id="seasons" class="shrine-glass mb-xl">
+      <h2>7 Japanese Seasons</h2>
+      <p class="text-center" style="color: var(--giniro-dark);">
+        Based on traditional 72 micro-seasons, condensed to 7 major celebrations
+      </p>
+
+      <div class="grid-3" style="margin-top: 2rem;">
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">🌸</div>
+          <h4>立春 Risshun</h4>
+          <p style="font-size: 0.875rem; color: var(--sakura-light);">Feb 4 - Spring Awakening</p>
+          <p style="font-size: 0.75rem; color: var(--giniro-dark);">Breeding +100%</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">💧</div>
+          <h4>小満 Shōman</h4>
+          <p style="font-size: 0.875rem; color: var(--wasure-light);">May 21 - Gentle Rain</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">🌿</div>
+          <h4>梅雨 Tsuyu</h4>
+          <p style="font-size: 0.875rem; color: var(--matcha-light);">Jun 6 - Plum Rains</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 0.75rem;">
+          <div style="font-size: 3rem;">⭐</div>
+          <h4 style="color: var(--kin);">小暑 Shochō</h4>
+          <p style="font-size: 0.875rem; color: var(--kin-light);">Jul 7 - Star Festival</p>
+          <p style="font-size: 0.75rem; color: var(--kin);">MAJOR EVENT +150%</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">🍂</div>
+          <h4>寒露 Kanro</h4>
+          <p style="font-size: 0.875rem; color: #fb923c;">Oct 8 - Autumn Dew</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">❄️</div>
+          <h4>立冬 Rittō</h4>
+          <p style="font-size: 0.875rem; color: var(--murasaki-light);">Nov 7 - Winter Arrival</p>
+        </div>
+
+        <div style="text-align: center; padding: 1rem;">
+          <div style="font-size: 3rem;">⛩️</div>
+          <h4>大寒 Daikan</h4>
+          <p style="font-size: 0.875rem; color: var(--giniro);">Jan 20 - Great Cold</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tier Comparison -->
+    <section class="shrine-glass mb-xl">
+      <h2>Freemium Tiers (Temple With Curtains)</h2>
+      <p class="text-center" style="color: var(--giniro-dark); margin-bottom: 2rem;">
+        Ethical monetization - never punishing, always delightful
+      </p>
+
+      <div class="grid-3">
+        <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 1rem; border: 2px solid var(--matcha);">
+          <div class="text-center">
+            <span class="tier-badge free" style="font-size: 1rem; padding: 0.75rem 1.5rem;">Free</span>
+            <h3 style="margin-top: 1rem;">¥0</h3>
+          </div>
+          <ul style="list-style: none; margin-top: 1.5rem; line-height: 2;">
+            <li>✅ 1 companion</li>
+            <li>✅ All 7 Kizuna levels</li>
+            <li>✅ 5 daily rituals</li>
+            <li>✅ Seasonal events</li>
+            <li>✅ Base cosmetics</li>
+            <li>❌ Breeding locked</li>
+            <li>❌ Cloud sync</li>
+            <li>❌ Personality scores</li>
+          </ul>
+        </div>
+
+        <div style="padding: 1.5rem; background: rgba(107, 70, 193, 0.1); border-radius: 1rem; border: 2px solid var(--murasaki); box-shadow: var(--shadow-glow);">
+          <div class="text-center">
+            <span class="tier-badge kizuna-pass" style="font-size: 1rem; padding: 0.75rem 1.5rem;">Kizuna Pass</span>
+            <h3 style="margin-top: 1rem;">¥4,990/mo</h3>
+            <p style="font-size: 0.875rem; color: var(--giniro-dark);">¥39,990/yr (save 33%)</p>
+          </div>
+          <ul style="list-style: none; margin-top: 1.5rem; line-height: 2;">
+            <li>✅ 7 companions</li>
+            <li>✅ All rituals</li>
+            <li>✅ Breeding (3/year)</li>
+            <li>✅ Personality scores</li>
+            <li>✅ Cloud sync</li>
+            <li>✅ All cosmetics</li>
+            <li>✅ Community trading</li>
+            <li>✅ 1.5× XP bonus</li>
+          </ul>
+        </div>
+
+        <div style="padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 1rem; border: 2px solid var(--kin); box-shadow: var(--shadow-lantern);">
+          <div class="text-center">
+            <span class="tier-badge eternal" style="font-size: 1rem; padding: 0.75rem 1.5rem;">Eternal</span>
+            <h3 style="margin-top: 1rem;">¥29,990</h3>
+            <p style="font-size: 0.875rem; color: var(--giniro-dark);">Lifetime</p>
+          </div>
+          <ul style="list-style: none; margin-top: 1.5rem; line-height: 2;">
+            <li>✅ 20 companions</li>
+            <li>✅ Unlimited breeding</li>
+            <li>✅ Raw genome view</li>
+            <li>✅ Shrine customization</li>
+            <li>✅ All cosmetics</li>
+            <li>✅ Priority support</li>
+            <li>✅ Roadmap voice</li>
+            <li>✅ 2× XP bonus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upgrade Prompt Example -->
+    <section class="upgrade-prompt mb-xl">
+      <div class="upgrade-icon">✨</div>
+      <h3>庭を広げる</h3>
+      <h4 style="color: var(--giniro-dark); font-weight: 400;">Expand Your Garden</h4>
+      <p style="margin: 1.5rem 0; color: var(--giniro-dark);">
+        あなたの仲間は元気です！もっと多くの魂を育てたいですか？<br>
+        Your companion thrives! Want to nurture more souls at once?
+      </p>
+      <div style="margin-top: 2rem;">
+        <button class="upgrade-cta">きずなパスを開く</button>
+        <button class="upgrade-later">Maybe Later</button>
+      </div>
+    </section>
+
+    <!-- Lanterns Display -->
+    <div class="text-center mb-xl">
+      <div style="display: flex; justify-content: center; gap: 2rem; align-items: flex-end;">
+        <div class="lantern"></div>
+        <div class="lantern" style="height: 100px;"></div>
+        <div class="lantern"></div>
+      </div>
+      <p style="margin-top: 2rem; color: var(--giniro-dark);">
+        Lanterns light your path through the garden
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center" style="margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+      <p style="color: var(--giniro-dark);">
+        🏮✨ Mononoke Garden ✨🌸
+      </p>
+      <p style="color: var(--giniro-dark); font-size: 0.875rem; margin-top: 0.5rem;">
+        Built with sacred bonds and hidden mathematics
+      </p>
+      <p style="color: var(--giniro-dark); font-size: 0.875rem; margin-top: 0.5rem;">
+        "Kizuna Through Daily Ritual" - 絆を通じた日々の儀式
+      </p>
+    </footer>
+  </div>
+
+  <!-- Sakura Particles (decorative) -->
+  <div class="sakura-particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="sakura-particle" style="left: 30%; animation-delay: 2s;"></div>
+  <div class="sakura-particle" style="left: 50%; animation-delay: 4s;"></div>
+  <div class="sakura-particle" style="left: 70%; animation-delay: 1s;"></div>
+  <div class="sakura-particle" style="left: 90%; animation-delay: 3s;"></div>
+
+  <script>
+    // Simple demo interactions
+    document.querySelectorAll('.torii-gate').forEach(gate => {
+      gate.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.torii-gate').forEach(g => g.classList.remove('active'));
+        gate.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.ritual-btn:not(.locked)').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          btn.style.transform = '';
+        }, 100);
+
+        // Show XP gained notification
+        const xp = btn.querySelector('.ritual-xp').textContent;
+        console.log(`Ritual performed! ${xp} gained`);
+      });
+    });
+  </script>
+</body>
+</html>
