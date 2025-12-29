@@ -10,7 +10,9 @@
       "Bash(npx kill-port 3000 3001)",
       "Bash(npm run:*)",
       "Bash(findstr:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npx expo start --tunnel)",
+      "Bash(npx expo start:*)"
     ]
   }
 }
