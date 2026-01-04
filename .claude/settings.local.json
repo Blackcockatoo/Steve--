@@ -12,7 +12,19 @@
       "Bash(findstr:*)",
       "Bash(grep:*)",
       "Bash(npx expo start --tunnel)",
-      "Bash(npx expo start:*)"
+      "Bash(npx expo start:*)",
+      "Bash(netstat:*)",
+      "Bash(curl:*)",
+      "Bash(timeout 20 npx expo start:*)",
+      "Bash(tee:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(set RCT_METRO_PORT=8081)",
+      "Bash(timeout 15 npx expo start:*)",
+      "Bash(unzip:*)",
+      "Bash(npx expo install:*)",
+      "Bash(npm install:*)",
+      "Bash(ipconfig:*)",
+      "Bash(npx qrcode-terminal:*)"
     ]
   }
 }
