@@ -5,7 +5,15 @@
  * throughout your component tree.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   getConfig,
   cloneConfig,
@@ -20,11 +28,71 @@ import {
   PRICING,
   type AppConfig,
   type TierLevel,
+  type AppMode,
 } from './appConfig';
+
+interface ConfigContextValue {
+  config: AppConfig;
+  tier: TierLevel;
+  mode: AppMode;
+  can: typeof can;
+  upgrade: (tier: TierLevel) => void;
+  toggleUiMode: () => void;
+  setBatteryMode: (enabled: boolean) => void;
+  paywallMessages: typeof PAYWALL_MESSAGES;
+  cosmeticPacks: typeof COSMETIC_PACKS;
+  soundPacks: typeof SOUND_PACKS;
+  pricing: typeof PRICING;
+}
+
+const ConfigContext = createContext<ConfigContextValue | null>(null);
+
+export function ConfigProvider({ children }: { children: ReactNode }) {
+  const [config, setLocalConfig] = useState<AppConfig>(() => getConfig());
+
+  useEffect(() => {
+    const unsubscribe = subscribeToConfigChanges((newConfig) => {
+      setLocalConfig(cloneConfig(newConfig));
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const upgrade = useCallback((tier: TierLevel) => {
+    upgradeTier(tier);
+  }, []);
+
+  const toggleUiMode = useCallback(() => {
+    toggleMode();
+  }, []);
+
+  const setBatteryMode = useCallback((enabled: boolean) => {
+    enableBatteryMode(enabled);
+  }, []);
+
+  const value = useMemo<ConfigContextValue>(
+    () => ({
+      config,
+      tier: config.tier,
+      mode: config.mode,
+      can,
+      upgrade,
+      toggleUiMode,
+      setBatteryMode,
+      paywallMessages: PAYWALL_MESSAGES,
+      cosmeticPacks: COSMETIC_PACKS,
+      soundPacks: SOUND_PACKS,
+      pricing: PRICING,
+    }),
+    [config, upgrade, toggleUiMode, setBatteryMode]
+  );
+
+  return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
+}
 
 // ===== MAIN HOOK =====
 
-export function useAppConfig() {
+function useUnscopedAppConfig(): ConfigContextValue {
   const [config, setLocalConfig] = useState<AppConfig>(getConfig());
 
   useEffect(() => {
@@ -63,13 +131,25 @@ export function useAppConfig() {
   };
 }
 
+function useConfigContext(): ConfigContextValue {
+  const context = useContext(ConfigContext);
+  if (context) {
+    return context;
+  }
+  return useUnscopedAppConfig();
+}
+
+export function useAppConfig() {
+  return useConfigContext();
+}
+
 // ===== SPECIALIZED HOOKS =====
 
 /**
  * Hook for checking companion limits
  */
 export function useCompanionLimits(currentCount: number) {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     current: currentCount,
@@ -119,7 +199,7 @@ export function useGenomeFeatures() {
  * Hook for visual effects management
  */
 export function useVisualEffects() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     particlesEnabled: config.visuals.enableParticleFields,
@@ -137,7 +217,7 @@ export function useVisualEffects() {
  * Hook for audio features
  */
 export function useAudioFeatures() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     enabledScales: Array.from(config.audio.enabledScales),
@@ -153,7 +233,7 @@ export function useAudioFeatures() {
  * Hook for evolution features
  */
 export function useEvolution() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     enabled: config.evolution.enabled,
@@ -168,7 +248,7 @@ export function useEvolution() {
  * Hook for ritual/interaction features
  */
 export function useRituals() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     availableRituals: Array.from(config.rituals.enabledRituals),
@@ -196,7 +276,7 @@ export function useConsciousness() {
  * Hook for data/sync features
  */
 export function useDataFeatures() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     cloudSync: config.data.enableCloudSync,
@@ -225,7 +305,7 @@ export function usePerformance() {
  * Hook for UI customization
  */
 export function useUISettings() {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   return {
     showAdvancedStats: config.ui.showAdvancedStats,
@@ -270,7 +350,7 @@ export function useFeatureLock(
   feature: 'companion' | 'genomeLab' | 'emotions' | 'cloudSync' | 'cosmeticPack' | 'mythicMode',
   options?: { currentCount?: number; pack?: string }
 ) {
-  const { config } = useAppConfig();
+  const { config, can } = useAppConfig();
 
   let isLocked = false;
   let reason = '';

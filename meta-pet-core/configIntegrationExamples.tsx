@@ -5,7 +5,9 @@
  * without major refactoring - just gate what's visible/enabled.
  */
 
+import React from 'react';
 import { getConfig, can } from './appConfig';
+import { ConfigProvider, useAppConfig, useEmotions } from './useAppConfig';
 import type { ExpandedEmotionalState } from './consciousness';
 import type { Genome, DerivedTraits } from './genome/types';
 
@@ -198,6 +200,26 @@ function StatBar({ label, value }: { label: string; value: number }) {
 function openGenomeLab(genome: Genome) {
   // Open full genome lab interface
   console.log('Opening Genome Lab with genome:', genome);
+}
+
+// ===== EXAMPLE 4: CONFIG PROVIDER =====
+// Wrap your app once to avoid duplicate subscriptions across hooks
+
+export function AppWithConfigProvider({ children }: { children: React.ReactNode }) {
+  return <ConfigProvider>{children}</ConfigProvider>;
+}
+
+export function ExampleComponentUsingHooks() {
+  const { tier, toggleUiMode } = useAppConfig();
+  const { enabledEmotions } = useEmotions();
+
+  return (
+    <div>
+      <div>Current tier: {tier}</div>
+      <button onClick={toggleUiMode}>Toggle UI Mode</button>
+      <div>Enabled emotions: {enabledEmotions.join(', ')}</div>
+    </div>
+  );
 }
 
 // ===== EXAMPLE 4: PARTICLE FIELD RENDERING =====
