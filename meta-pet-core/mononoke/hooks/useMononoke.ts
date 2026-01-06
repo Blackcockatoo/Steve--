@@ -4,7 +4,15 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { getCurrentSeason, getActiveEvent, type Season, type SeasonalEvent } from '../../../mononoke-garden-core/seasons/calendar';
-import { KIZUNA_TIERS, calculateRitualXP, addKizunaXP, type KizunaLevel, type KizunaState } from '../../../mononoke-garden-core/kizuna/bondSystem';
+import {
+  KIZUNA_TIERS,
+  calculateRitualXP,
+  addKizunaXP,
+  updateConsecutiveDays,
+  applyMissedDaysPenalty,
+  type KizunaLevel,
+  type KizunaState,
+} from '../../../mononoke-garden-core/kizuna/bondSystem';
 import { extractPersonality, type Genome, type PersonalityScores } from '../../../mononoke-garden-core/genetics/base7Genome';
 
 /**
@@ -34,17 +42,13 @@ export function useKizuna(initialState: KizunaState) {
   const [kizuna, setKizuna] = useState<KizunaState>(initialState);
 
   const performRitual = useCallback((ritualType: string, hasPass: boolean = false) => {
-    const timeSinceLastInteraction = kizuna.lastInteraction
-      ? (Date.now() - kizuna.lastInteraction.getTime()) / (1000 * 60 * 60)
-      : 24;
-
-    const xpGain = calculateRitualXP(ritualType, kizuna, { hasPass });
-
     setKizuna((prev) => {
-      const newState = addKizunaXP(prev, xpGain);
-      return newState;
+      const streakAdjusted = updateConsecutiveDays(prev);
+      const penaltyAdjusted = applyMissedDaysPenalty(streakAdjusted);
+      const xpGain = calculateRitualXP(ritualType, penaltyAdjusted, { hasPass });
+      return addKizunaXP(penaltyAdjusted, xpGain);
     });
-  }, [kizuna.lastInteraction]);
+  }, []);
 
   const currentLevelInfo = KIZUNA_TIERS[kizuna.level];
   const nextLevelInfo = kizuna.level < 7 ? KIZUNA_TIERS[(kizuna.level + 1) as KizunaLevel] : null;
