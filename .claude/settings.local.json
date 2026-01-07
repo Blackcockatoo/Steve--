@@ -24,7 +24,12 @@
       "Bash(npx expo install:*)",
       "Bash(npm install:*)",
       "Bash(ipconfig:*)",
-      "Bash(npx qrcode-terminal:*)"
+      "Bash(npx qrcode-terminal:*)",
+      "Bash(timeout 10 bash:*)",
+      "Bash(timeout 5 npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(start http://localhost:3001)",
+      "Bash(start http://localhost:3000)"
     ]
   }
 }
